@@ -11,7 +11,6 @@ const Navbar = () => {
             <div className={styles.container}>
                 <h1 className={styles.logo}>📦 {config.appName}</h1>
                 <div className={styles.navLinks}>
-                    {new Date().toISOString()}
                     <Link
                         to="/shippingBoxCalculator/add"
                         className={`${styles.navLink} ${location.pathname === '/shippingBoxCalculator/add' || location.pathname === '/shippingBoxCalculator/' ? styles.active : ''}`}
