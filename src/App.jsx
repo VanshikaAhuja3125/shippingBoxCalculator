@@ -20,6 +20,7 @@ function App() {
                 <Route path="/" element={<BoxForm />} />
                 <Route path="/add" element={<BoxForm />} />
                 <Route path="/list" element={<BoxTable />} />
+                <Route path="*" element={<BoxForm />} />
               </Routes>
             </main>
             <Toast />
