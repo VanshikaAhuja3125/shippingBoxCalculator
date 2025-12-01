@@ -3,7 +3,6 @@ import { config } from '../../utils/config';
 import styles from './Navbar.module.css';
 
 const Navbar = () => {
-    // Get current route location to highlight active link
     const location = useLocation();
 
     return (

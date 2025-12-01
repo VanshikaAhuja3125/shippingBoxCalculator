@@ -27,7 +27,6 @@ export const convertHexToRGB = (hexColor) => {
     return `${r}, ${g}, ${b}`;
 }
 
-// Format currency value for display
 export const formatCurrency = (amount) => {
     const symbol = getCurrencySymbol(config.currency);
     return `${symbol}${amount.toFixed(2)}`;

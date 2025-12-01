@@ -1,14 +1,8 @@
 import { createContext, useContext, useState, useEffect, useRef } from "react";
 import { calculateShippingCost } from "../services/shippingService";
 
-// Create Context
 const BoxContext = createContext();
 
-
-/* 
-Custom hook to use BoxContext 
-Throws error if used outside BoxProvider 
-*/
 export const useBoxContext = () => {
     const context = useContext(BoxContext);
     if (!context) {
@@ -17,7 +11,6 @@ export const useBoxContext = () => {
     return context;
 }
 
-// BoxProvider Component
 export const BoxProvider = ({ children }) => {
 
     // Helper function to load boxes from localStorage
@@ -51,18 +44,11 @@ export const BoxProvider = ({ children }) => {
         localStorage.setItem('shippingBoxes', JSON.stringify(boxes));
     }, [boxes]);
 
-    /* 
-    Add a new box
-    @param {Object} boxData - Box data (receiverName, weight, color, country)
-    @returns {Object} - Created box with calculated shipping cost
-   */
-
     const addBox = (boxData) => {
         const shippingCost = calculateShippingCost(boxData.weight, boxData.country);
 
-        // Create box object with unique ID
         const newBox = {
-            id: Date.now().toString(), // Simple ID generation
+            id: Date.now().toString(),
             receiverName: boxData.receiverName,
             weight: boxData.weight,
             color: boxData.color,

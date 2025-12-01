@@ -1,0 +1,18 @@
+.select {
+  padding: 0.75rem;
+  border: 2px solid #ddd;
+  border-radius: 4px;
+  font-size: 1rem;
+  transition: border-color 0.3s;
+  font-family: inherit;
+}
+
+.select:focus {
+  outline: none;
+  border-color: #3498db;
+}
+
+.inputError {
+  border-color: #e74c3c;
+}
+

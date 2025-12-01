@@ -4,7 +4,6 @@ import { config } from '../../utils/config';
 import styles from './BoxTable.module.css';
 
 const BoxTable = () => {
-  // Get boxes from context
   const { boxes } = useBoxContext();
 
   const rgbToCssColor = (rgbString) => {

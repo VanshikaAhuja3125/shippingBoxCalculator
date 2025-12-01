@@ -2,6 +2,7 @@
 
 import { useEffect } from 'react';
 import { useToastContext } from '../../context/ToastContext';
+import IconButton from '../atoms/IconButton/IconButton';
 import styles from './Toast.module.css';
 
 const Toast = () => {
@@ -39,20 +40,20 @@ const Toast = () => {
             <span className={styles.toastIcon}>
               {toast.type === 'success' && '✓'}
               {toast.type === 'error' && '✕'}
-              {toast.type === 'info' && 'ℹ'}
+              {toast.type === 'info' && 'i'}
             </span>
             <span className={styles.toastMessage}>{toast.message}</span>
           </div>
-          <button
-            className={styles.closeButton}
+          <IconButton
             onClick={(e) => {
               e.stopPropagation();
               removeToast(toast.id);
             }}
-            aria-label="Close"
+            ariaLabel="Close"
+            variant="default"
           >
-            ×
-          </button>
+            x
+          </IconButton>
         </div>
       ))}
     </div>

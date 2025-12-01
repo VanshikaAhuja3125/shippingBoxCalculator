@@ -13,17 +13,8 @@ export const useToastContext = () => {
 };
 
 export const ToastProvider = ({ children }) => {
-  // State to store all active toasts
   const [toasts, setToasts] = useState([]);
 
-  /**
-   * Show a toast notification
-   * 
-   * @param {string} message - Message to display
-   * @param {string} type - Type of toast: 'success', 'error', 'info'
-   * @param {number} duration - Auto-close duration in ms (default: 3000)
-   * @param {boolean} autoClose - Whether to auto-close (default: true)
-   */
   const showToast = (message, type = 'info', duration = 3000, autoClose = true) => {
     const id = Date.now().toString() + Math.random().toString(36).substr(2, 9);
     

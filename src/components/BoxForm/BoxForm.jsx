@@ -3,6 +3,11 @@ import { useBoxContext } from "../../context/BoxContext";
 import { useToastContext } from '../../context/ToastContext';
 import { getCountries, RECEIVER_NAME_MAX_LENGTH } from "../../utils/constants";
 import { convertHexToRGB } from "../../services/shippingService";
+import Label from '../atoms/Label/Label';
+import Input from '../atoms/Input/Input';
+import Select from '../atoms/Select/Select';
+import Button from '../atoms/Button/Button';
+import ErrorMessage from '../atoms/ErrorMessage/ErrorMessage';
 import styles from './BoxForm.module.css';
 
 
@@ -11,7 +16,6 @@ const BoxForm = () => {
     const { showToast } = useToastContext();
     const countries = getCountries();
 
-    // Form state - stores all input values
     const [formData, setFormData] = useState({
         receiverName: '',
         weight: '',
@@ -19,10 +23,8 @@ const BoxForm = () => {
         country: '',
     });
 
-    // Error state - stores validation errors
     const [errors, setErrors] = useState({});
 
-    // Updates formData when user types/selects
     const handleChange = (e) => {
         const { name, value } = e.target;
 
@@ -79,13 +81,11 @@ const BoxForm = () => {
             }
         }
 
-        // Update form data
         setFormData((prev) => ({
             ...prev,
             [name]: value,
         }));
 
-        // Clear error for this field when user types correctly
         if (errors?.[name] &&
             !(name === 'weight' && parseFloat(value) < 0) &&
             !(name === 'receiverName' && value?.length > RECEIVER_NAME_MAX_LENGTH)) {
@@ -96,11 +96,9 @@ const BoxForm = () => {
         }
     };
 
-    // Validate form data - Checks all required fields and weight validation
     const validateForm = () => {
         const newErrors = {};
 
-        // Check receiver name
         if (!formData?.receiverName?.trim()) {
             newErrors.receiverName = 'Receiver name is required';
         } else if (formData?.receiverName?.length > RECEIVER_NAME_MAX_LENGTH) {
@@ -108,7 +106,6 @@ const BoxForm = () => {
             showToast(`Receiver name cannot exceed ${RECEIVER_NAME_MAX_LENGTH} characters.`, 'error');
         }
 
-        // Check weight
         if (!formData?.weight) {
             newErrors.weight = 'Weight is required';
         } else {
@@ -120,14 +117,12 @@ const BoxForm = () => {
             }
         }
 
-        // Check country
         if (!formData?.country) {
             newErrors.country = 'Destination country is required';
         }
 
         setErrors(newErrors);
 
-        // Show error toast if validation fails
         if (Object.keys(newErrors).length > 0) {
             showToast('Please fill all required fields correctly.', 'error');
         }
@@ -153,7 +148,6 @@ const BoxForm = () => {
 
         addBox(boxData);
 
-        // Reset form after successful submission
         setFormData({
             receiverName: '',
             weight: '',
@@ -171,12 +165,11 @@ const BoxForm = () => {
             <h2 className={styles.title}>Add New Shipping Box</h2>
 
             <form className={styles.form} onSubmit={handleSubmit}>
-                {/* Receiver Name Field */}
                 <div className={styles.formGroup}>
                     <div className={styles.labelWrapper}>
-                        <label htmlFor="receiverName" className={styles.label}>
+                        <Label htmlFor="receiverName">
                             Receiver Name <span className={styles.required}>*</span>
-                        </label>
+                        </Label>
                         <span
                             className={`${styles.charCount} ${formData?.receiverName?.length > RECEIVER_NAME_MAX_LENGTH
                                     ? styles.error
@@ -188,27 +181,25 @@ const BoxForm = () => {
                             {formData?.receiverName?.length}/{RECEIVER_NAME_MAX_LENGTH}
                         </span>
                     </div>
-                    <input
+                    <Input
                         type="text"
                         id="receiverName"
                         name="receiverName"
                         value={formData.receiverName}
                         onChange={handleChange}
-                        className={`${styles.input} ${errors.receiverName ? styles.inputError : ''}`}
                         placeholder="Enter receiver name"
+                        error={!!errors.receiverName}
                     />
                     {errors.receiverName && (
-                        <span className={styles.error}>{errors.receiverName}</span>
+                        <ErrorMessage>{errors.receiverName}</ErrorMessage>
                     )}
                 </div>
 
-
-                {/* Weight Field */}
                 <div className={styles.formGroup}>
-                    <label htmlFor="weight" className={styles.label}>
+                    <Label htmlFor="weight">
                         Weight (kg) <span className={styles.required}>*</span>
-                    </label>
-                    <input
+                    </Label>
+                    <Input
                         type="number"
                         id="weight"
                         name="weight"
@@ -221,7 +212,6 @@ const BoxForm = () => {
                                     ...prev,
                                     weight: 'Weight cannot be negative. Defaulting to 0.',
                                 }));
-                                // Show error toast
                                 showToast('Weight cannot be negative. Defaulting to 0.', 'error');
                                 setFormData((prev) => ({
                                     ...prev,
@@ -231,44 +221,42 @@ const BoxForm = () => {
                         }}
                         min="0"
                         step="0.01"
-                        className={`${styles.input} ${errors.weight ? styles.inputError : ''}`}
                         placeholder="Enter weight in kilograms"
+                        error={!!errors.weight}
                     />
                     {errors.weight && (
-                        <span className={styles.error}>{errors.weight}</span>
+                        <ErrorMessage>{errors.weight}</ErrorMessage>
                     )}
                 </div>
 
-                {/* Box Color Field */}
                 <div className={styles.color}>
-                    <label htmlFor="color" className={styles.label}>
+                    <Label htmlFor="color">
                         Box Color <span className={styles.required}>*</span>
-                    </label>
+                    </Label>
                     <div className={styles.colorInputWrapper}>
-                        <input
+                        <Input
                             type="color"
                             id="color"
                             name="color"
                             value={formData.color}
                             onChange={handleChange}
-                            className={styles.colorInput} />
+                        />
                         <span className={styles.colorValue}>
                             RGB: ({convertHexToRGB(formData.color)})
                         </span>
                     </div>
                 </div>
 
-                {/* Destination Country Field */}
                 <div className={styles.formGroup}>
-                    <label htmlFor="country" className={styles.label}>
+                    <Label htmlFor="country">
                         Destination Country <span className={styles.required}>*</span>
-                    </label>
-                    <select
+                    </Label>
+                    <Select
                         id="country"
                         name="country"
                         value={formData.country}
                         onChange={handleChange}
-                        className={`${styles.select} ${errors.country ? styles.inputError : ''}`}
+                        error={!!errors.country}
                     >
                         <option value="">Select a country</option>
                         {countries.map((country) => (
@@ -276,16 +264,16 @@ const BoxForm = () => {
                                 {country}
                             </option>
                         ))}
-                    </select>
+                    </Select>
 
                     {errors.country && (
-                        <span className={styles.error}>{errors.country}</span>
+                        <ErrorMessage>{errors.country}</ErrorMessage>
                     )}
                 </div>
 
-                <button type="submit" className={styles.submitButton}>
+                <Button type="submit" variant="primary">
                     Save box
-                </button>
+                </Button>
             </form>
         </div>
     )
