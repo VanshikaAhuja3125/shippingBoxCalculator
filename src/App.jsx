@@ -1,4 +1,4 @@
-import { HashRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { BoxProvider } from "./context/BoxContext";
 import { ToastProvider } from './context/ToastContext';
 import Navbar from "./components/NavBar/NavBar";
@@ -17,9 +17,9 @@ function App() {
             <Navbar />
             <main className="main-content">
               <Routes>
-                <Route path="/" element={<BoxForm />} />
-                <Route path="/add" element={<BoxForm />} />
-                <Route path="/list" element={<BoxTable />} />
+                <Route path="/shippingBoxCalculator" element={<BoxForm />} />
+                <Route path="/shippingBoxCalculator/add" element={<BoxForm />} />
+                <Route path="/shippingBoxCalculator/list" element={<BoxTable />} />
                 <Route path="*" element={<BoxForm />} />
               </Routes>
             </main>
