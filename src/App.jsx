@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { HashRouter as Router, Routes, Route } from "react-router-dom";
 import { BoxProvider } from "./context/BoxContext";
 import { ToastProvider } from './context/ToastContext';
 import Navbar from "./components/NavBar/NavBar";
