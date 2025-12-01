@@ -1,0 +1,146 @@
+.formContainer {
+  max-width: 600px;
+  margin: 0 auto;
+  background: white;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.title {
+  margin-top: 0;
+  margin-bottom: 2rem;
+  color: #2c3e50;
+  font-size: 1.8rem;
+  text-align: center;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.labelWrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.label {
+  font-weight: 600;
+  color: #34495e;
+  font-size: 0.95rem;
+}
+
+.required {
+  color: #e74c3c;
+}
+
+.charCount {
+  font-size: 0.8rem;
+  color: #7f8c8d;
+  text-align: right;
+  margin-top: 0.25rem;
+}
+.charCount.warning {
+  color: #f39c12;
+  font-weight: 600;
+}
+
+.charCount.error {
+  color: #e74c3c;
+  font-weight: 600;
+}
+
+.input,
+.select {
+  padding: 0.75rem;
+  border: 2px solid #ddd;
+  border-radius: 4px;
+  font-size: 1rem;
+  transition: border-color 0.3s;
+  font-family: inherit;
+}
+
+.input:focus,
+.select:focus {
+  outline: none;
+  border-color: #3498db;
+}
+
+.inputError {
+  border-color: #e74c3c;
+}
+
+.error {
+  color: #e74c3c;
+  font-size: 0.875rem;
+  margin-top: -0.25rem;
+}
+
+.colorInputWrapper {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.colorInput {
+  width: 80px;
+  height: 50px;
+  border: 2px solid #ddd;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.colorValue {
+  font-size: 0.9rem;
+  color: #7f8c8d;
+  font-family: monospace;
+}
+
+.submitButton {
+  padding: 0.875rem 2rem;
+  background-color: #3498db;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin-top: 0.5rem;
+}
+
+.submitButton:hover {
+  background-color: #2980b9;
+}
+
+.submitButton:active {
+  transform: scale(0.98);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .formContainer {
+    padding: 1.5rem;
+    margin: 0 1rem;
+  }
+
+  .title {
+    font-size: 1.5rem;
+  }
+
+  .colorInputWrapper {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
