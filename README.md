@@ -77,7 +77,7 @@ src/
 
 1. **Clone the repository**
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/VanshikaAhuja3125/shippingBoxCalculator.git
    cd shipping-box-app
    ```
 
